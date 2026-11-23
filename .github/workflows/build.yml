@@ -3,6 +3,37 @@ on:
   workflow_dispatch:
 jobs:
   nada:
+    runs-on: 
+    name: Compilar Astra
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  build:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Organizar arquivos
+        run: |
+          mkdir -p gamemodes/astra include
+          mv astra.pwn gamemodes/
+          mv core.inc accounts.inc pvp.inc rp.inc admin.inc gamemodes/astra/
+          mv Dini.inc zcmd.inc sscanf2.inc streamer.inc include/
+      - name: Instalar compilador
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libc6-i386
+          wget -q https://github.com/pawn-lang/compiler/releases/download/v3.10.10/pawnc-3.10.10-linux.tar.gz
+          tar xzf pawnc-3.10.10-linux.tar.gz
+          git clone --depth 1 https://github.com/pawn-lang/samp-stdlib.git stdlib
+      - name: Compilar
+        run: |
+          export LD_LIBRARY_PATH="$PWD/pawnc-3.10.10-linux/lib"
+          ./pawnc-3.10.10-linux/bin/pawncc gamemodes/astra.pwn -o"gamemodes/astra.amx" -i"./pawnc-3.10.10-linux/include" -i"./stdlib" -i"./include" '-;+' '-(+' -d3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: astra-amx
+          path: gamemodes/astra.amx
+          -latest
     steps:
       - run: echo ok

@@ -7,6 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Organizar arquivos
+        run: |
+          mkdir -p gamemodes/astra include
+          mv astra.pwn gamemodes/
+          mv core.inc accounts.inc pvp.inc rp.inc admin.inc gamemodes/astra/
+          mv Dini.inc zcmd.inc sscanf2.inc streamer.inc include/
       - name: Instalar compilador
         run: |
           sudo apt-get update

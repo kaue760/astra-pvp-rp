@@ -16,8 +16,8 @@ jobs:
           git clone --depth 1 https://github.com/pawn-lang/samp-stdlib.git stdlib
       - name: Compilar
         run: |
-          export LD_LIBRARY_PATH=$PWD/pawnc-3.10.10-linux/lib
-          ./pawnc-3.10.10-linux/bin/pawncc gamemodes/astra.pwn -ogamemodes/astra.amx -i./stdlib -i./include -;+ -(+ -d3
+          export LD_LIBRARY_PATH="$PWD/pawnc-3.10.10-linux/lib"
+          ./pawnc-3.10.10-linux/bin/pawncc gamemodes/astra.pwn -o"gamemodes/astra.amx" -i"./stdlib" -i"./include" '-;+' '-(+' -d3
       - uses: actions/upload-artifact@v4
         with:
           name: astra-amx

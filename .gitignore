@@ -1,0 +1,14 @@
+# Dados de jogadores e casas (nunca subir)
+scriptfiles/Astra/Contas/*
+scriptfiles/Astra/Casas/*
+scriptfiles/Astra/Bans/*
+!scriptfiles/Astra/*/.gitkeep
+
+# Compilado e logs
+*.amx
+server_log.txt
+logs/
+crashinfo.txt
+
+# Segredos
+server.cfg.local
